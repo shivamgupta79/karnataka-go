@@ -1,0 +1,12 @@
+[
+{"id":"s1","region":"Mysuru","type":"budget lodge","label":"Budget lodge near the palace area (sample)","pricePerNight":1200,"safetyFlags":["main road","well lit"],"familyFriendly":true,"parking":false,"vegFood":true,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s2","region":"Mysuru","type":"hotel","label":"Mid-range hotel, central Mysuru (sample)","pricePerNight":3200,"safetyFlags":["main road","well lit","women-friendly"],"familyFriendly":true,"parking":true,"vegFood":true,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s3","region":"Hampi","type":"homestay","label":"Homestay in Hampi village (sample)","pricePerNight":1500,"safetyFlags":["family run"],"familyFriendly":true,"parking":false,"vegFood":true,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s4","region":"Hampi","type":"hotel","label":"Hotel in Kamalapura (sample)","pricePerNight":3000,"safetyFlags":["main road"],"familyFriendly":true,"parking":true,"vegFood":false,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s5","region":"Coorg","type":"homestay","label":"Coffee-estate homestay (sample)","pricePerNight":3500,"safetyFlags":["family run"],"familyFriendly":true,"parking":true,"vegFood":false,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s6","region":"Coastal","type":"hostel","label":"Beach hostel dorm bed (sample)","pricePerNight":700,"safetyFlags":[],"familyFriendly":false,"parking":false,"vegFood":false,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s7","region":"Coastal","type":"hotel","label":"Sea-view hotel, Udupi/Murudeshwar (sample)","pricePerNight":3000,"safetyFlags":["main road","well lit"],"familyFriendly":true,"parking":true,"vegFood":true,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s8","region":"Hassan","type":"hotel","label":"Hotel in Hassan town (sample)","pricePerNight":2200,"safetyFlags":["main road"],"familyFriendly":true,"parking":true,"vegFood":true,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s9","region":"Badami","type":"budget lodge","label":"Budget lodge, Badami (sample)","pricePerNight":1000,"safetyFlags":["main road"],"familyFriendly":true,"parking":false,"vegFood":true,"source":"seed-estimate","fetchedAt":"2026-10-25"},
+{"id":"s10","region":"Chikkamagaluru","type":"resort","label":"Hill resort near Mullayanagiri (sample)","pricePerNight":5500,"safetyFlags":["gated"],"familyFriendly":true,"parking":true,"vegFood":false,"source":"seed-estimate","fetchedAt":"2026-10-25"}
+]

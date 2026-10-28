@@ -1,0 +1,20 @@
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+// The project uses SUPABASE_SERVICE_ROLE_KEY (same secret key, never exposed to browser)
+const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
+
+export const serviceConfigured =
+  url.startsWith("https://") && serviceKey.length > 10;
+
+/**
+ * Returns a Supabase client with the service role key (bypasses RLS).
+ * Returns null when env vars are not set. NEVER expose to the browser.
+ * Only call from server-side code (API routes, server components).
+ */
+export function createServiceClient() {
+  if (!serviceConfigured) return null;
+  return createSupabaseClient(url, serviceKey, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
