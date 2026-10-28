@@ -1,45 +1,24 @@
-# ── Secrets — NEVER commit these ──────────────────────────────────────────
-.env
-.env.local
-.env.*.local
-.env.production
-.env.development
-
-# ── Node ──────────────────────────────────────────────────────────────────
-node_modules/
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
-# ── Next.js ───────────────────────────────────────────────────────────────
-apps/web/.next/
-apps/web/out/
-apps/web/.vercel/
+node_modules
+dist
+dist-ssr
+*.local
 
-# ── Build outputs ─────────────────────────────────────────────────────────
-dist/
-build/
-*.tsbuildinfo
-
-# ── Python / optimizer ────────────────────────────────────────────────────
-apps/optimizer/__pycache__/
-apps/optimizer/*.pyc
-apps/optimizer/.venv/
-apps/optimizer/venv/
-*.py[cod]
-
-# ── OS / editor ───────────────────────────────────────────────────────────
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
-*.swp
-*.swo
-.idea/
-.vscode/settings.json
-
-# ── Kiro agent artefacts (not source code) ────────────────────────────────
-.agents/
-
-# ── Test coverage ─────────────────────────────────────────────────────────
-coverage/
-.nyc_output/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
