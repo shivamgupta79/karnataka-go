@@ -432,6 +432,182 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
+   AUTH PAGE — SPLIT LAYOUT
+   Left: Karnataka visual showcase  |  Right: form
+══════════════════════════════════════════════════════════════════════════════ */
+
+/* Override the layout max-width for auth page only */
+.auth-page-root {
+  display: flex;
+  min-height: calc(100vh - 64px); /* subtract header */
+  margin: -2rem -1rem; /* pull out of layout padding */
+}
+
+.auth-left-panel {
+  display: none;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .auth-left-panel {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+  }
+  .auth-right-panel {
+    flex: 0 0 440px;
+    overflow-y: auto;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.auth-right-panel {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── Showcase ── */
+.karnataka-showcase {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: background 0.8s ease;
+  overflow: hidden;
+}
+
+.showcase-illustration {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.showcase-illustration svg {
+  width: 100%;
+  height: auto;
+  max-height: 65%;
+  object-fit: contain;
+}
+
+.showcase-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.88) 0%,
+    rgba(0,0,0,0.45) 45%,
+    rgba(0,0,0,0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.showcase-content {
+  position: relative;
+  z-index: 10;
+  padding: 2rem 2.5rem 2.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.showcase-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 0.25rem;
+}
+
+.showcase-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.showcase-title {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.showcase-region {
+  font-size: 0.82rem;
+  opacity: 0.65;
+  margin: 0;
+}
+
+.showcase-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin: 0;
+  max-width: 36ch;
+}
+
+.showcase-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.showcase-dot {
+  height: 8px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+  padding: 0;
+}
+
+.showcase-progress-bg {
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.showcase-progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  animation: progressFill 4.5s linear forwards;
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
    PRINT STYLES
    The .print-only div is hidden on screen and fully rendered for print.
    The rest of the page UI (nav, buttons, interactive map, tabs) is hidden.

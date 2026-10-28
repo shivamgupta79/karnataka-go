@@ -2,6 +2,7 @@
 import { useState } from "react";
 import PlannerForm from "@/components/PlannerForm";
 import Itinerary from "@/components/Itinerary";
+import BannerStrip from "@/components/BannerStrip";
 import type { ChecklistGroup, Plan, Prefs } from "@/lib/types";
 
 export default function Home() {
@@ -33,6 +34,9 @@ export default function Home() {
 
   return (
     <>
+      {/* ── Top banners / announcements ── */}
+      <BannerStrip position="top" />
+
       {/* ── Hero ── */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
@@ -73,6 +77,9 @@ export default function Home() {
       </div>
 
       <PlannerForm prefs={prefs} setPrefs={setPrefs} onSubmit={submit} loading={loading} />
+
+      {/* ── Inline ads (shown between form and results) ── */}
+      <BannerStrip position="inline" />
 
       {error && (
         <div className="alert-error mt-4 flex items-start gap-2 text-sm">
