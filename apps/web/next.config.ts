@@ -21,6 +21,12 @@ const config: NextConfig = {
   // Remove the X-Powered-By header (also done in middleware, belt-and-suspenders)
   poweredByHeader: false,
 
+  // Render (and other PaaS hosts) inject a PORT env var.
+  // `next start` reads this automatically in Next.js 15 — listed here as
+  // documentation so the value is visible in the config object.
+  // No extra serverRuntimeConfig needed; process.env.PORT is used by the
+  // Next.js CLI before this config is evaluated.
+
   // Prevent server-side env vars leaking into the client bundle.
   // Only variables explicitly listed under `env` or prefixed NEXT_PUBLIC_ are
   // exposed to the browser. Everything else stays server-only.

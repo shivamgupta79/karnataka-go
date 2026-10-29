@@ -1,0 +1,72 @@
+## render.yaml — KarnatakaGo deployment blueprint
+## Docs: https://render.com/docs/blueprint-spec
+##
+## Two services:
+##   1. web  — Next.js 15 app  (Node 20, free or paid plan)
+##   2. optimizer — FastAPI + OR-Tools microservice (Python 3.11, optional)
+##
+## Deploy: connect your GitHub repo in the Render dashboard, choose
+## "Use Blueprint" and Render will read this file automatically.
+
+services:
+  # ── 1. Next.js web app ────────────────────────────────────────────────────
+  - type: web
+    name: karnataka-go-web
+    runtime: node
+    region: singapore     # closest to India; change to oregon / frankfurt as needed
+    plan: free            # change to starter/standard for always-on + more RAM
+
+    # Build runs from the repo root
+    rootDir: apps/web
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+
+    # Render injects PORT automatically; Next.js reads it via the env below
+    envVars:
+      - key: PORT
+        value: 3000
+
+      # ── Supabase ──────────────────────────────────────────────────────────
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false          # set manually in Render dashboard (never commit real values)
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+
+      # ── AI ────────────────────────────────────────────────────────────────
+      - key: PORTKEY_API_KEY
+        sync: false          # recommended — leave blank if using Anthropic directly
+      - key: ANTHROPIC_API_KEY
+        sync: false          # used when PORTKEY_API_KEY is not set
+
+      # ── Admin ─────────────────────────────────────────────────────────────
+      - key: ADMIN_SECRET
+        sync: false          # generate: node -e "require('crypto').randomBytes(32).toString('hex')|console.log"
+
+      # ── Optional: OR-Tools optimiser ──────────────────────────────────────
+      # Point this at the optimizer service URL below once it is deployed.
+      # Leave blank to fall back to built-in nearest-neighbour routing.
+      - key: OPTIMIZER_URL
+        sync: false
+
+      # ── Site URL (used in Supabase auth redirect emails) ──────────────────
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false          # e.g. https://karnataka-go-web.onrender.com
+
+    # Health-check so Render knows the app is ready
+    healthCheckPath: /api/banners
+
+  # ── 2. OR-Tools route optimiser (optional) ────────────────────────────────
+  # Remove this block entirely if you don't need optimised multi-day routes.
+  - type: web
+    name: karnataka-go-optimizer
+    runtime: python
+    region: singapore
+    plan: free
+
+    rootDir: apps/optimizer
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+
+    healthCheckPath: /health
