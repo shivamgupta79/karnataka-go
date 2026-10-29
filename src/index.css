@@ -1,46 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
-/* THESE ARE PLACEHOLDER FOR EMPTY APP, FEEL FREE TO REPLACE WITH DESIRED DESIGN */
-
 @theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --color-text-muted: var(--text-muted);
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Deepened from the generated #0891B2 / #059669 so white-on-brand text
+     clears the 4.5:1 contrast bar; hue family is unchanged. */
+  --color-primary: oklch(0.52 0.095 226);
+  --color-on-primary: oklch(1 0 0);
+  --color-secondary: oklch(0.7971 0.1339 211.53);
+  --color-accent: oklch(0.55 0.115 163);
+  --color-background: oklch(0.9841 0.0189 200.87);
+  --color-foreground: oklch(0.3982 0.0664 227.39);
+  --color-card: oklch(1 0 0);
+  --color-muted: oklch(0.9528 0.0117 231.65);
+  --color-muted-foreground: oklch(0.556 0.03 232);
+  --color-border: oklch(0.9167 0.0772 205.04);
+  --color-destructive: oklch(0.5771 0.2152 27.33);
+  --color-ring: oklch(0.52 0.095 226);
+
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
 }
 
-:root {
-  --text-muted: oklch(0.554 0.046 257.417);
-  --dotgrid-surface: oklch(0.97 0 0);
-  --dotgrid-glow-strong: oklch(0.45 0.05 250 / 12%);
-  --dotgrid-glow-mid: oklch(0.45 0.05 250 / 7%);
-  --dotgrid-glow-soft: oklch(0.45 0.05 250 / 4%);
-  --dotgrid-glow-faint: oklch(0.45 0.05 250 / 2%);
-  --dotgrid-dot: oklch(0 0 0 / 20%);
-}
-
+/* Host injects a `dark` class on <html>; these override the semantic tokens. */
 .dark {
-  --text-muted: oklch(0.9015 0.0154 241.79);
-  --dotgrid-surface: oklch(0.1638 0 0);
-  --dotgrid-glow-strong: oklch(0.41 0.14 250 / 45%);
-  --dotgrid-glow-mid: oklch(0.41 0.14 250 / 22%);
-  --dotgrid-glow-soft: oklch(0.41 0.14 250 / 10%);
-  --dotgrid-glow-faint: oklch(0.41 0.14 250 / 4%);
-  --dotgrid-dot: oklch(0.41 0.14 250 / 4%);
+  --color-primary: oklch(0.74 0.115 212);
+  --color-on-primary: oklch(0.17 0.03 245);
+  --color-secondary: oklch(0.72 0.1 212);
+  --color-accent: oklch(0.75 0.15 163);
+  --color-background: oklch(0.155 0.015 250);
+  --color-foreground: oklch(0.95 0.008 230);
+  --color-card: oklch(0.205 0.018 250);
+  --color-muted: oklch(0.26 0.02 250);
+  --color-muted-foreground: oklch(0.73 0.02 232);
+  --color-border: oklch(0.32 0.025 244);
+  --color-destructive: oklch(0.66 0.19 25);
+  --color-ring: oklch(0.74 0.115 212);
 }
 
-.bg-dotgrid-glow {
-  background-color: var(--dotgrid-surface);
-  background-image:
-    radial-gradient(
-      circle at 50% 118%,
-      var(--dotgrid-glow-strong) 0%,
-      var(--dotgrid-glow-mid) 22%,
-      var(--dotgrid-glow-soft) 32%,
-      var(--dotgrid-glow-faint) 38%,
-      transparent 45%
-    ),
-    radial-gradient(var(--dotgrid-dot) 1px, transparent 1px);
-  background-size:
-    100% 100%,
-    16px 16px;
-  background-position: center, center;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-heading);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+}
+
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
+}
+
+.press {
+  transition:
+    transform 160ms ease-out,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    color 200ms ease;
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-pop {
+  animation: pop 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-slide-up {
+  animation: slide-up 220ms ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 160ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .press:active {
+    transform: none;
+  }
 }
