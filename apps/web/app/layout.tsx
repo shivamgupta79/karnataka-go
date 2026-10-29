@@ -5,6 +5,7 @@ import UserMenu from "@/components/UserMenu";
 import SOSButton from "@/components/SOSButton";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: "KarnatakaGo — AI travel planner for Karnataka",
   description: "Budget-aware, safety-aware itineraries for Karnataka. Save, share and explore.",
   manifest: "/manifest.webmanifest",

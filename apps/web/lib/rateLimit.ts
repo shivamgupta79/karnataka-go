@@ -17,13 +17,15 @@ interface Window {
 
 const store = new Map<string, Window>();
 
-/** Prune expired keys every 5 minutes to avoid memory leaks. */
+/** Prune expired keys every 5 minutes to avoid memory leaks.
+ *  .unref() lets the Node process exit cleanly even if this timer is pending —
+ *  important for Render's graceful shutdown during deploys. */
 setInterval(() => {
   const now = Date.now();
   for (const [k, v] of store.entries()) {
     if (v.resetAt < now) store.delete(k);
   }
-}, 5 * 60 * 1000);
+}, 5 * 60 * 1000).unref();
 
 export interface RateLimitOptions {
   /** Rolling window duration in milliseconds */

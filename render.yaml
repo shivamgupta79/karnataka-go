@@ -21,12 +21,11 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npm run start
 
-    # Render injects PORT automatically; Next.js reads it via the env below
+    # ── Environment variables ────────────────────────────────────────────────
+    # Render injects PORT automatically at runtime.
+    # `next start -p ${PORT:-3000}` in package.json reads it.
+    # Do NOT hardcode PORT here — Render assigns it dynamically.
     envVars:
-      - key: PORT
-        value: 3000
-
-      # ── Supabase ──────────────────────────────────────────────────────────
       - key: NEXT_PUBLIC_SUPABASE_URL
         sync: false          # set manually in Render dashboard (never commit real values)
       - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
