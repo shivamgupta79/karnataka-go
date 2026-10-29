@@ -18,14 +18,16 @@ services:
 
     # Build runs from the repo root
     rootDir: apps/web
-    buildCommand: npm install && npm run build
-    startCommand: npm run start
+    buildCommand: npm install && npm run build && cp -r .next/static .next/standalone/apps/web/.next/static && cp -r public .next/standalone/apps/web/public
+    startCommand: node .next/standalone/apps/web/server.js
 
     # ── Environment variables ────────────────────────────────────────────────
     # Render injects PORT automatically at runtime.
-    # `next start -p ${PORT:-3000}` in package.json reads it.
-    # Do NOT hardcode PORT here — Render assigns it dynamically.
+    # The standalone server.js reads PORT and HOSTNAME from env directly.
     envVars:
+      # Bind to all interfaces so Render's proxy can reach the app
+      - key: HOSTNAME
+        value: "0.0.0.0"
       - key: NEXT_PUBLIC_SUPABASE_URL
         sync: false          # set manually in Render dashboard (never commit real values)
       - key: NEXT_PUBLIC_SUPABASE_ANON_KEY

@@ -5,6 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p ${PORT:-3000}",
+    "start:render": "node .next/standalone/apps/web/server.js",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
